@@ -1,4 +1,44 @@
-{ 
-  "invoices":[],
-  "pos":[]
+{
+    "invoices": [
+        {
+            "category": "Shopping",
+            "Invoice_Number": "61356291",
+            "Invoice_Date": "09/06/2012",
+            "Due_Date": "",
+            "PO_Reference_Number": "",
+            "Tax_Details": "10%",
+            "Line_Item_Details": [
+                {
+                    "Item_Name": "Wine Glasses Goblets Pair Clear",
+                    "Quantity": "500",
+                    "Unit_Price": "1200",
+                    "Line_Total": "6600"
+                },
+                {
+                    "Item_Name": "With Hooks Stemware Storage",
+                    "Quantity": "400",
+                    "Unit_Price": "2808",
+                    "Line_Total": "12355"
+                },
+                {
+                    "Item_Name": "Replacement Corkscrew Parts",
+                    "Quantity": "100",
+                    "Unit_Price": "750",
+                    "Line_Total": "825"
+                },
+                {
+                    "Item_Name": "HOME ESSENTIALS GRADIENT",
+                    "Quantity": "100",
+                    "Unit_Price": "1299",
+                    "Line_Total": "1429"
+                }
+            ],
+            "Discounts": "",
+            "Payment_Received": "",
+            "total amount": "21209",
+            "total tax": "1928",
+            "summary": "Purchase of wine glasses, stemware storage, replacement corkscrew parts, and home essentials gradient"
+        }
+    ],
+    "pos": []
 }
