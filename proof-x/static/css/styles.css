@@ -1,0 +1,461 @@
+:root {
+    --primary-color: #2a2a72;
+    --secondary-color: #009ffd;
+    --accent-color: #00d4ff;
+    --background-color: #1a1a2e;
+    --surface-color: #232342;
+    --text-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.left-container, .right-container {
+    background: var(--surface-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.upload-section {
+    margin-bottom: 1.5rem;
+}
+
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-file-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-viewer {
+    height: calc(100vh - 200px);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.file-display {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-display img, .file-display embed {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.thumbnails-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail {
+    aspect-ratio: 1;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail.active {
+    border-color: var(--accent-color);
+}
+
+.details-section {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.labels-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.label-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--accent-color);
+    margin-bottom: 0.25rem;
+}
+
+.value {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.table-container {
+    margin-top: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+tr {
+    transition: background-color 0.2s;
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    
+    .labels-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.label-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.label-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.value[contenteditable="true"] {
+    min-height: 24px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.value[contenteditable="true"]:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.value[contenteditable="true"]:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.label-item:hover .edit-btn {
+    opacity: 0.7;
+}
+
+.edit-btn:hover {
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Style for table cells */
+.editable-cell {
+    position: relative;
+    min-height: 24px;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.editable-cell[contenteditable="true"]:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.editable-cell[contenteditable="true"]:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* Save button styles */
+.save-changes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.save-changes.visible {
+    transform: translateY(0);
+}
+
+.save-changes:hover {
+    background: var(--secondary-color);
+}
+
+
+.file-display-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.close-button:hover {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.zoomed-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-display-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    flex-direction: column-reverse;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden; /* Prevent content overflow */
+    position: relative;
+}
+
+.file-content {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keep the aspect ratio */
+    transform-origin: center center; /* Set the zoom origin to the center */
+    cursor: zoom-in;
+    transition: transform 0.25s ease; /* Smooth transition */
+}
+
+.zoomed {
+    cursor: zoom-out;
+}
+.file-name {
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 4px;
+    margin-top: auto;
+    word-break: break-word;
+}
+
+.thumbnail-filename {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    word-break: break-word;
+    color: var(--text-color);
+    padding: 0.25rem;
+}
+
+.thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail.active {
+    border: 2px solid var(--accent-color);
+    border-radius: 0.5rem;
+}
+
+.drag-highlight {
+    border: 2px dashed var(--accent-color) !important;
+    background: rgba(0, 212, 255, 0.1) !important;
+}
+
+.label-item textarea {
+    width: 100%; /* Full width */
+    height: 100px; /* Adjust height */
+    padding: 1rem;
+    border: 2px solid transparent; /* Start with transparent border */
+    border-radius: 1rem; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.15); /* Dark background for a futuristic look */
+    color: #f0f0f0; /* Light text */
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    resize: vertical; /* Allow resizing vertically */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1); /* Soft glow effect */
+    transition: all 0.3s ease; /* Smooth transitions for hover and focus */
+}
+
+
+
+.label-item textarea:focus {
+    border-color: #0a6283; /* Neon green border on focus */
+    box-shadow: 0 0 15px rgba(15, 93, 108, 0.5); /* Glowing border */
+    background: rgba(255, 255, 255, 0.15); /* Slightly darker background on focus */
+}
+
+/* Placeholder text styling */
+.label-item textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Subtle placeholder color */
+    font-style: italic; /* Add some styling to placeholder */
+}
+
+/* Hover effect to make the border light up */
+.label-item textarea:hover {
+    border-color: #063448; /* Neon green border when hovering */
+    box-shadow: 0 0 12px rgba(1, 91, 74, 0.3); /* Glowing shadow on hover */
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.2);
+    border-top: 5px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
